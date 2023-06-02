@@ -37,10 +37,11 @@ jobs:
       - name: Install dependencies
         run: |
           mamba create -n potatoCAD python=3.8
+          conda init
           conda activate potatoCAD
           python -m pip install --upgrade pip
           pip install ./requirements-pip.txt
-          mamba install ./requirements-conda.txt
+          mamba install ./requirements-conda.txt 
           mamba install -c conda-forge conda-pack
           conda pack -n potatoCAD -o environment-${{ matrix.os }}.zip
       - name: Create Release
