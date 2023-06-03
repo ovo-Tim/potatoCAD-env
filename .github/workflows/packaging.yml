@@ -28,14 +28,14 @@ jobs:
           - os: windows
             miniforge-variant: Mambaforge
     steps:
-      # - name: create_release
-      #   id: create_release
-      #   uses: actions/create-release@v1
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     tag_name: ${{ github.event.inputs.release_tag }}
-      #     release_name: 发布 ${{ github.event.inputs.release_tag }}
+      - name: create_release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.event.inputs.release_tag }}
+          release_name: 发布 ${{ github.event.inputs.release_tag }}
 
       - name: Checkout master
         uses: actions/checkout@v2
@@ -55,9 +55,8 @@ jobs:
           conda pack -n potatoCAD -o environment-${{ matrix.os }}.zip --zip-symlinks
           
       - name: Upload the artifacts
-        uses: skx/github-action-publish-binaries@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: AButler/upload-release-assets@v2.0
         with:
-          releaseId: ${{ steps.create_release.outputs.id }}
-          args: 'environment-*'
+          release-tag: ${{ steps.create_release.outputs.id }}
+          files: 'environment-*'
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
