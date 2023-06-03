@@ -29,7 +29,8 @@ jobs:
             miniforge-variant: Mambaforge
     steps:
       - name: create_release
-        id: create_release
+        # id: create_release
+        if: runner.os == 'Linux'
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
