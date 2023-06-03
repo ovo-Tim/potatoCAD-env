@@ -44,7 +44,7 @@ jobs:
           pip install -r ./requirements-pip.txt
           mamba install --yes --file ./requirements-conda.txt 
           mamba install -c conda-forge conda-pack
-          conda pack -n potatoCAD -o environment-${{ matrix.os }}.zip
+          conda pack -n potatoCAD -o environment-${{ matrix.os }}.zip –-zip-symlinks
       - name: Create Release
         uses: GoogleCloudPlatform/release-please-action@v3
         id: release
