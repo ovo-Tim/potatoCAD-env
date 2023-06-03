@@ -7,6 +7,10 @@ on:
   workflow_dispatch:
     branches:
       - master
+    inputs:
+      release_tag:
+        description: '发布tag'
+        required: true
 
 jobs:      
   mambaforge:
@@ -54,5 +58,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          releaseId: ${{ steps.create_release.outputs.id }}
+          releaseId: ${{ github.event.inputs.release_tag }}
           args: 'environment-*'
