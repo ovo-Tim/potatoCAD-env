@@ -8,21 +8,9 @@ on:
     branches:
       - master
 
-jobs:
-  create_release:
-    runs-on: ubuntu-latest
-    steps:
-      - name: 创建发布
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: 发布 ${{ github.ref }}
+jobs:      
   mambaforge:
     name: mambaforge (${{ matrix.os }}, Mambaforge)
-    needs: [create_release]
     runs-on: ${{ matrix.os }}-latest
     strategy:
       fail-fast: false
@@ -36,6 +24,14 @@ jobs:
           - os: windows
             miniforge-variant: Mambaforge
     steps:
+      - name: create_release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: 发布 ${{ github.ref }}
       - name: Checkout master
         uses: actions/checkout@v2
         with:
@@ -58,5 +54,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          releaseId: ${{ needs.create_release.outputs.id }}
+          releaseId: ${{ steps.create_release.outputs.id }}
           args: 'environment-*'
