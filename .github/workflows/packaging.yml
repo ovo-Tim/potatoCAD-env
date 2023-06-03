@@ -58,6 +58,8 @@ jobs:
       - name: Upload the artifacts
         uses: AButler/upload-release-assets@v2.0
         with:
-          release-tag: ${{ steps.create_release.outputs.id }}
+          # release_tag: ${{ steps.create_release.outputs.id }}
+          # release_id: ${{ steps.create_release.outputs.id }}
+          release-tag: ${{ github.event.inputs.release_tag }}
           files: 'environment-*'
           repo-token: ${{ secrets.GITHUB_TOKEN }}
