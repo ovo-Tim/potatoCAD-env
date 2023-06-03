@@ -7,7 +7,6 @@ if [ -f /etc/os-release ]; then
     elif [ $ID = "macOS" ]; then
         source /Users/runner/.bash_profile
     fi
-fi
 conda activate potatoCAD
 python -m pip install --upgrade pip
 pip install -r ./requirements-pip.txt
