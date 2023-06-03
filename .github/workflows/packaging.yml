@@ -34,27 +34,13 @@ jobs:
           miniforge-variant: ${{ matrix.miniforge-variant }}
           miniforge-version: ${{ matrix.miniforge-version }}
           use-mamba: true
-      - name: Env
-        run: |
-          mamba create -n potatoCAD python=3.8
-          conda init
-      - name: Env-linux
-        if: matrix.os == 'ubuntu'
-        run: |
-          source /home/runner/.bashrc
-      - name: Env-mac
-        if: matrix.os == 'macos'
-        run: |
-          source /Users/runner/.bash_profile
 
       - name: Install dependencies
         run: |
-          conda activate potatoCAD
-          python -m pip install --upgrade pip
-          pip install -r ./requirements-pip.txt
-          mamba install --yes --file ./requirements-conda.txt 
+          bash ./install.sh
           mamba install -c conda-forge conda-pack
           conda pack -n potatoCAD -o environment-${{ matrix.os }}.zip --zip-symlinks
+          
       - name: Create Release
         uses: GoogleCloudPlatform/release-please-action@v3
         id: release
