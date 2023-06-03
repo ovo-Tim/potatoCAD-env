@@ -34,11 +34,13 @@ jobs:
           miniforge-variant: ${{ matrix.miniforge-variant }}
           miniforge-version: ${{ matrix.miniforge-version }}
           use-mamba: true
-      - name: Install dependencies
+      - name: Env
         run: |
           mamba create -n potatoCAD python=3.8
           conda init
-          source /home/runner/.bashrc
+      - name: Install dependencies
+        run: |
+          # source /home/runner/.bashrc
           conda activate potatoCAD
           python -m pip install --upgrade pip
           pip install -r ./requirements-pip.txt
