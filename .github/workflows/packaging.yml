@@ -11,6 +11,7 @@ on:
 jobs:
   mambaforge:
     name: mambaforge (${{ matrix.os }}, Mambaforge)
+    needs: [create_release]
     runs-on: ${{ matrix.os }}-latest
     strategy:
       fail-fast: false
@@ -46,4 +47,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
+          releaseId: ${{ needs.create_release.outputs.id }}
           args: 'environment-*'
