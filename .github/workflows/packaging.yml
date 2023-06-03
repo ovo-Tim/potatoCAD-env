@@ -28,14 +28,15 @@ jobs:
           - os: windows
             miniforge-variant: Mambaforge
     steps:
-      - name: create_release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.event.inputs.release_tag }}
-          release_name: 发布 ${{ github.event.inputs.release_tag }}
+      # - name: create_release
+      #   id: create_release
+      #   uses: actions/create-release@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     tag_name: ${{ github.event.inputs.release_tag }}
+      #     release_name: 发布 ${{ github.event.inputs.release_tag }}
+
       - name: Checkout master
         uses: actions/checkout@v2
         with:
