@@ -1,1 +1,1 @@
-pythonocc
+pythonocc-core
