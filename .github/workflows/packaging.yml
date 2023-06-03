@@ -39,11 +39,11 @@ jobs:
           mamba create -n potatoCAD python=3.8
           conda init
       - name: Env-linux
-        if: matrix.os == "ubuntu"
+        if: matrix.os == 'ubuntu'
         run: |
           source /home/runner/.bashrc
       - name: Env-mac
-        if: matrix.os == "macos"
+        if: matrix.os == 'macos'
         run: |
           source /Users/runner/.bash_profile
 
