@@ -50,7 +50,7 @@ jobs:
           use-mamba: true
 
       - name: Install dependencies
-
+        run: bash
         if runner.os == 'ubuntu':
           run: source /home/runner/.bashrc
         if runner.os == 'macos':
