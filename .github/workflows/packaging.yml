@@ -50,11 +50,12 @@ jobs:
           use-mamba: true
 
       - name: Install dependencies
-        run: bash
         if runner.os == 'ubuntu':
           run: source /home/runner/.bashrc
-        if runner.os == 'macos':
+        else if runner.os == 'macos':
           run: source /Users/runner/.bash_profile
+        else:
+          run: bash
 
       - name: pack
         run: |
