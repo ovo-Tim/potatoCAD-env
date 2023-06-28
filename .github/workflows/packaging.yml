@@ -1,9 +1,9 @@
 name: packaging
 
 on:
-  pull_request:
-    branches:
-      - master
+  # pull_request:
+  #   branches:
+  #     - master
   workflow_dispatch:
     branches:
       - master
@@ -50,6 +50,7 @@ jobs:
           use-mamba: true
 
       - name: Install dependencies
+
         if runner.os == 'ubuntu':
           run: source /home/runner/.bashrc
         if runner.os == 'macos':
