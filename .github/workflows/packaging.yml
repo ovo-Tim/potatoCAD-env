@@ -50,19 +50,10 @@ jobs:
           use-mamba: true
 
       - name: Install dependencies
-        if runner.os == 'ubuntu':
-          run: source /home/runner/.bashrc
-        else if runner.os == 'macos':
-          run: source /Users/runner/.bash_profile
-        else:
-          run: bash
+        run: bash install.sh
 
       - name: pack
         run: |
-          conda activate potatoCAD
-          python -m pip install --upgrade pip
-          pip install -r ./requirements-pip.txt
-          mamba install --yes --file ./requirements-conda.txt 
           mamba install -c conda-forge conda-pack
           conda pack -n potatoCAD -o environment-${{ matrix.os }}.zip --zip-symlinks
           
