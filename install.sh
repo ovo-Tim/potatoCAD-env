@@ -1,8 +1,9 @@
+#! /usr/bin/bash
 mamba create -n potatoCAD python=3.8
 conda init
-if ["$(uname)"=="Darwin"];then
+if [ "$(uname)" == "Darwin" ];then
     source /Users/runner/.bash_profile
-elif ["$(expr substr $(uname -s) 1 5)"=="Linux"];then   
+elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ];then  
     source /home/runner/.bashrc
 fi
 conda activate potatoCAD
